@@ -1,0 +1,45 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Transaction {
+  id: ID!
+  title: String!
+  amount: Float!
+  typeQ: String!
+  date: String!
+  category: Category!
+}
+
+type Category {
+  id: ID!
+  name: String!
+}
+
+type IncomeExpenseItem {
+  title: String!
+  amount: Float!
+}
+
+type IncomeExpenseSummary {
+  incomeItems: [IncomeExpenseItem!]!
+  expenseItems: [IncomeExpenseItem!]!
+  balance: Float!
+}
+
+input CreateTransactionInput {
+  title: String!
+  amount: Float!
+  typeQ: String!
+  date: String!
+  categoryId: ID!
+}
+
+type Query {
+  getIncomeExpenseSummary(startDate: String!, endDate: String!): IncomeExpenseSummary!
+}
+
+
+type Mutation {
+  createTransaction(input: CreateTransactionInput!): Transaction!
+}
